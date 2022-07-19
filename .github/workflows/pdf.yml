@@ -5,12 +5,14 @@ on: push
 jobs:
   convert_via_pandoc:
     runs-on: ubuntu-latest
+    container: pandoc/latex
     steps:
       - uses: actions/checkout@v3
-      - run:
-        using: 'docker'
-        image: 'Dockerfile'
-        entrypoint: 'make'
+      - run: |
+        apk --update add make
+        tlmgr update --self --all
+        tlmgr install collection-langjapanese
+      - run: make 
       - uses: actions/upload-artifact@master
         with:
           name: README.pdf 
