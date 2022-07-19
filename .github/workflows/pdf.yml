@@ -8,11 +8,13 @@ jobs:
     container: pandoc/latex
     steps:
       - uses: actions/checkout@v3
-      - run: |
-        apk --update add make
-        tlmgr update --self --all
-        tlmgr install collection-langjapanese
-      - run: make 
+      - name: Setup Pandoc
+        run: |
+          apk --update add make
+          tlmgr update --self --all
+          tlmgr install collection-langjapanese
+      - name: Generate PDF
+        run: make 
       - uses: actions/upload-artifact@master
         with:
           name: README.pdf 
