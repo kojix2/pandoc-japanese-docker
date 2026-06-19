@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     container: pandoc/latex
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Setup Pandoc
         run: |
           apk --update add make
